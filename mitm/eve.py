@@ -3,12 +3,16 @@ import sys
 from common import *
 from const import *
 
+# Input argument variables
 args = sys.argv
 tags = ["--custom", "--relay", "--break-heart"]
 
+# Input validation
 if len(args) != 2 or not (args[1] in tags):
     print("You must provide exactly one of these tags as an argument upon execution: --relay --break-heart --custom")
     exit(0)
+
+# MITM script
 else:
     dialog = Dialog('print')
 
@@ -59,8 +63,7 @@ else:
     encrypt_and_send(to_send, aes2, socket2)
     dialog.info("Message sent to Bob!")
 
-    # Close chats
+    # Close both chats
     tear_down(socket1, BUFFER_DIR, buffer1)
     tear_down(socket2, BUFFER_DIR, BUFFER_FILE_NAME)
-
     exit(0)
