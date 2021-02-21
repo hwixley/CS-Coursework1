@@ -15,9 +15,10 @@ else:
 
     # Connect to Alice and get her key
     socket1, aes1 = setup("bob", BUFFER_DIR, BUFFER_FILE_NAME)
+    buffer1 = BUFFER_FILE_NAME + "1"
+    os.rename(BUFFER_DIR + BUFFER_FILE_NAME, BUFFER_DIR + buffer1)
 
     # Connect to Bob and get his key
-    # os.rename(BUFFER_DIR + BUFFER_FILE_NAME, BUFFER_DIR + BUFFER_FILE_NAME + "2")
     socket2, aes2 = setup("alice", BUFFER_DIR, BUFFER_FILE_NAME)
 
     # Receive bob's message
@@ -60,6 +61,7 @@ else:
     dialog.info("Message sent to Bob!")
 
     # Close chat with alice
-    #tear_down(socket1, BUFFER_DIR, BUFFER_FILE_NAME)
+    tear_down(socket1, BUFFER_DIR, buffer1)
+    tear_down(socket2, BUFFER_DIR, BUFFER_FILE_NAME)
 
     exit(0)
